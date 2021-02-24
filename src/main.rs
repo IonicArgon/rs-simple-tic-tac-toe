@@ -1,5 +1,6 @@
 use std::io;
 
+// prints the grid
 fn print_grid(arr: &[[char; 3]; 3]) {
     for i in arr.iter() {
         for j in i.iter() {
@@ -9,6 +10,7 @@ fn print_grid(arr: &[[char; 3]; 3]) {
     }
 }
 
+// manipulates the grid
 fn manip_grid(arr: &mut [[char; 3]; 3], play: &mut char) {
     let mut buf = String::new();
 
@@ -16,11 +18,13 @@ fn manip_grid(arr: &mut [[char; 3]; 3], play: &mut char) {
         .read_line(&mut buf)
         .expect("Failed to read from stdin!");
     
+    // found this on stackoverflow
     let com: Vec<usize> = buf
         .split_whitespace()
         .filter_map(|w| w.parse().ok())
         .collect();
-    
+
+    // feel like this could be cleaner but oh well
     if com.is_empty() {
         println!("Invalid input!");
     }
@@ -41,6 +45,7 @@ fn manip_grid(arr: &mut [[char; 3]; 3], play: &mut char) {
     }
 }
 
+// check for a winner
 fn check_grid(arr: &[[char; 3]; 3]) -> char {
     let mut out : char = '_';
 
@@ -78,9 +83,11 @@ fn check_grid(arr: &[[char; 3]; 3]) -> char {
         arr[2][0] != '_' && arr[2][1] != '_' && arr[2][2] != '_' {
             out = 'T';
     }
+
     out
 }
 
+// main game function
 fn play_game() {
     let mut grid: [[char; 3]; 3] = [
         ['_', '_', '_'],
@@ -110,6 +117,7 @@ fn main() {
     println!("Input \"y, x\" to select a cell.");
     println!("Start from top-left corner. Values from 0 -> 2.");
     
+    // for the "replayability"
     loop {
         let mut play = false;
         play_game();
