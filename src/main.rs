@@ -143,6 +143,4 @@ fn main() {
             break;
         }
     }
-
-    println!("Thanks for playing!");
 }
