@@ -81,7 +81,7 @@ fn check_grid(arr: &[[char; 3]; 3]) -> char {
     out
 }
 
-fn main() {
+fn play_game() {
     let mut grid: [[char; 3]; 3] = [
         ['_', '_', '_'],
         ['_', '_', '_'],
@@ -89,10 +89,6 @@ fn main() {
     ];
     let mut player = 'X';
     let mut winner = '_';
-
-    println!("Welcome to Simple Tic Tac Toe.");
-    println!("Input \"y, x\" to select a cell.");
-    println!("Start from top-left corner. Values from 0 -> 2.");
     
     while winner == '_' {
         print_grid(&grid);
@@ -107,4 +103,38 @@ fn main() {
     else {
         println!("{} wins!", winner);
     }
+}
+
+fn main() {
+    println!("Welcome to Simple Tic Tac Toe.");
+    println!("Input \"y, x\" to select a cell.");
+    println!("Start from top-left corner. Values from 0 -> 2.");
+    
+    loop {
+        let mut play = false;
+        play_game();
+
+        println!("Play again? (y/N)");
+
+        loop {
+            let mut buf = String::new();
+            io::stdin()
+                .read_line(&mut buf)
+                .expect("Failed to read from stdin!");
+        
+            match buf.trim() {
+                "y" => {play = true; break;},
+                "Y" => {play = true; break;},
+                "n" => {break;},
+                "N" => {break;},
+                _ => {println!("Invalid input!")}
+            }
+        }
+
+        if play == false {
+            break;
+        }
+    }
+
+    println!("Thanks for playing!");
 }
