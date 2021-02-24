@@ -25,7 +25,7 @@ fn manip_grid(arr: &mut [[char; 3]; 3], play: &mut char) {
         .collect();
 
     // feel like this could be cleaner but oh well
-    if com.is_empty() {
+    if com.is_empty() || com.len() < 2 {
         println!("Invalid input!");
     }
     else if com[0] > 2 || com[1] > 2 {
